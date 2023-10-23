@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>ReturnTrue.AspNetCore.Identity.Anonymous</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Authors>Alessandro Riperi</Authors>
+    <PackageVersion>2.0.0</PackageVersion>
+    <Authors>Alessandro Riperi, Ken Granderson</Authors>
     <Description>Middleware for ASP.NET Core to enable the tracking of anonymous users</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Migration from request headers to request features</PackageReleaseNotes>
@@ -14,15 +14,13 @@
     <PackageProjectUrl>https://github.com/aleripe/AnonymousId</PackageProjectUrl>
     <RepositoryUrl>https://github.com/aleripe/AnonymousId</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
-    <Version>1.1.1</Version>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.1.4" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.3" />
   </ItemGroup>
 
 </Project>

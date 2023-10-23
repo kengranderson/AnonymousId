@@ -6,34 +6,34 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
 {
     public class AnonymousIdMiddleware
     {
-        private RequestDelegate nextDelegate;
-        private AnonymousIdCookieOptions cookieOptions;
+        readonly RequestDelegate _nextDelegate;
+        readonly AnonymousIdCookieOptions _cookieOptions;
 
         public AnonymousIdMiddleware(RequestDelegate nextDelegate, AnonymousIdCookieOptions cookieOptions)
         {
-            this.nextDelegate = nextDelegate;
-            this.cookieOptions = cookieOptions;
+            _nextDelegate = nextDelegate;
+            _cookieOptions = cookieOptions;
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
             HandleRequest(httpContext);
-            await nextDelegate.Invoke(httpContext);
+            await _nextDelegate.Invoke(httpContext);
         }
 
         public void HandleRequest(HttpContext httpContext)
         {
             string encodedValue;
-            bool isAuthenticated = httpContext.User.Identity.IsAuthenticated;
+            var isAuthenticated = httpContext.User.Identity.IsAuthenticated;
             DateTime now = DateTime.Now;
 
             // Handle secure cookies over an unsecured connection
-            if (cookieOptions.Secure && !httpContext.Request.IsHttps)
+            if (_cookieOptions.Secure && !httpContext.Request.IsHttps)
             {
-                encodedValue = httpContext.Request.Cookies[cookieOptions.Name];
+                encodedValue = httpContext.Request.Cookies[_cookieOptions.Name];
                 if (!string.IsNullOrWhiteSpace(encodedValue))
                 {
-                    httpContext.Response.Cookies.Delete(cookieOptions.Name);
+                    httpContext.Response.Cookies.Delete(_cookieOptions.Name);
                 }
 
                 // Adds the feature to request collection
@@ -43,8 +43,8 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
             }
 
             // Gets the value and anonymous Id data from the cookie, if available
-            encodedValue = httpContext.Request.Cookies[cookieOptions.Name];
-            AnonymousIdData decodedValue = AnonymousIdEncoder.Decode(encodedValue);
+            encodedValue = httpContext.Request.Cookies[_cookieOptions.Name];
+            var decodedValue = AnonymousIdEncoder.Decode(encodedValue);
 
             string anonymousId = null;
 
@@ -67,7 +67,7 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
             }
 
             // Don't create a secure cookie in an unsecured connection
-            if (cookieOptions.Secure && !httpContext.Request.IsHttps)
+            if (_cookieOptions.Secure && !httpContext.Request.IsHttps)
             {
                 return;
             }
@@ -86,19 +86,19 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
             else
             {
                 // Sliding expiration is not required for this request
-                if (!cookieOptions.SlidingExpiration || (decodedValue != null && decodedValue.ExpireDate > now && (decodedValue.ExpireDate - now).TotalSeconds > (cookieOptions.Timeout * 60) / 2))
+                if (!_cookieOptions.SlidingExpiration || (decodedValue != null && decodedValue.ExpireDate > now && (decodedValue.ExpireDate - now).TotalSeconds > (_cookieOptions.Timeout * 60) / 2))
                 {
                     return;
                 }
             }
 
             // Resets cookie expiration time
-            cookieOptions.Expires = DateTime.UtcNow.AddSeconds(cookieOptions.Timeout);
+            _cookieOptions.Expires = DateTime.UtcNow.AddSeconds(_cookieOptions.Timeout);
 
             // Appends the new cookie
-            AnonymousIdData data = new AnonymousIdData(anonymousId, cookieOptions.Expires.Value.DateTime);
+            var data = new AnonymousIdData(anonymousId, _cookieOptions.Expires.Value.DateTime);
             encodedValue = AnonymousIdEncoder.Encode(data);
-            httpContext.Response.Cookies.Append(cookieOptions.Name, encodedValue, cookieOptions);
+            httpContext.Response.Cookies.Append(_cookieOptions.Name, encodedValue, _cookieOptions);
         }
 
         public static void ClearAnonymousId(HttpContext httpContext, AnonymousIdCookieOptions cookieOptions)

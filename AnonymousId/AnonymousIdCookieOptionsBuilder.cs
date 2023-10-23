@@ -4,62 +4,62 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
 {
     public class AnonymousIdCookieOptionsBuilder
     {
-        private const string DEFAULT_COOKIE_NAME = ".ASPXANONYMOUS";
-        private const string DEFAULT_COOKIE_PATH = "/";
-        private const int DEFAULT_COOKIE_TIMEOUT = 100000;
-        private const int MINIMUM_COOKIE_TIMEOUT = 1;
-        private const int MAXIMUM_COOKIE_TIMEOUT = 60 * 60 * 24 * 365 * 2;
-        private const bool DEFAULT_COOKIE_REQUIRE_SSL = false;
+        const string DEFAULT_COOKIE_NAME = ".ASPXANONYMOUS";
+        const string DEFAULT_COOKIE_PATH = "/";
+        const int DEFAULT_COOKIE_TIMEOUT = 100000;
+        const int MINIMUM_COOKIE_TIMEOUT = 1;
+        const int MAXIMUM_COOKIE_TIMEOUT = 60 * 60 * 24 * 365 * 2;
+        const bool DEFAULT_COOKIE_REQUIRE_SSL = false;
         
-        private string cookieName;
-        private string cookiePath;
-        private int? cookieTimeout;
-        private string cookieDomain;
-        private bool? cookieRequireSsl;
+        string _cookieName;
+        string _cookiePath;
+        int? _cookieTimeout;
+        string _cookieDomain;
+        bool? _cookieRequireSsl;
 
         public AnonymousIdCookieOptionsBuilder SetCustomCookieName(string cookieName)
         {
-            this.cookieName = cookieName;
+            _cookieName = cookieName;
             return this;
         }
 
         public AnonymousIdCookieOptionsBuilder SetCustomCookiePath(string cookiePath)
         {
-            this.cookiePath = cookiePath;
+            _cookiePath = cookiePath;
             return this;
         }
 
         public AnonymousIdCookieOptionsBuilder SetCustomCookieTimeout(int cookieTimeout)
         {
-            this.cookieTimeout = Math.Min(Math.Max(MINIMUM_COOKIE_TIMEOUT, cookieTimeout), MAXIMUM_COOKIE_TIMEOUT);
+            _cookieTimeout = Math.Min(Math.Max(MINIMUM_COOKIE_TIMEOUT, cookieTimeout), MAXIMUM_COOKIE_TIMEOUT);
             return this;
         }
 
         public AnonymousIdCookieOptionsBuilder SetCustomCookieDomain(string cookieDomain)
         {
-            this.cookieDomain = cookieDomain;
+            _cookieDomain = cookieDomain;
             return this;
         }
 
         public AnonymousIdCookieOptionsBuilder SetCustomCookieRequireSsl(bool cookieRequireSsl)
         {
-            this.cookieRequireSsl = cookieRequireSsl;
+            _cookieRequireSsl = cookieRequireSsl;
             return this;
         }
 
         public AnonymousIdCookieOptions Build()
         {
-            AnonymousIdCookieOptions options = new AnonymousIdCookieOptions
+            AnonymousIdCookieOptions options = new()
             {
-                Name = cookieName ?? DEFAULT_COOKIE_NAME,
-                Path = cookiePath ?? DEFAULT_COOKIE_PATH,
-                Timeout = cookieTimeout ?? DEFAULT_COOKIE_TIMEOUT,
-                Secure = cookieRequireSsl ?? DEFAULT_COOKIE_REQUIRE_SSL
+                Name = _cookieName ?? DEFAULT_COOKIE_NAME,
+                Path = _cookiePath ?? DEFAULT_COOKIE_PATH,
+                Timeout = _cookieTimeout ?? DEFAULT_COOKIE_TIMEOUT,
+                Secure = _cookieRequireSsl ?? DEFAULT_COOKIE_REQUIRE_SSL
             };
 
-            if (!string.IsNullOrWhiteSpace(cookieDomain))
+            if (!string.IsNullOrWhiteSpace(_cookieDomain))
             {
-                options.Domain = cookieDomain;
+                options.Domain = _cookieDomain;
             }
 
             return options;

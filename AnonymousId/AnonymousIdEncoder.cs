@@ -14,12 +14,12 @@ namespace ReturnTrue.AspNetCore.Identity.Anonymous
             }
 
             byte[] bufferId = Encoding.UTF8.GetBytes(data.AnonymousId);
-            byte[] bufferIdLenght = BitConverter.GetBytes(bufferId.Length);
+            byte[] bufferIdLength = BitConverter.GetBytes(bufferId.Length);
             byte[] bufferDate = BitConverter.GetBytes(data.ExpireDate.ToFileTimeUtc());
             byte[] buffer = new byte[12 + bufferId.Length];
 
             Buffer.BlockCopy(bufferDate, 0, buffer, 0, 8);
-            Buffer.BlockCopy(bufferIdLenght, 0, buffer, 8, 4);
+            Buffer.BlockCopy(bufferIdLength, 0, buffer, 8, 4);
             Buffer.BlockCopy(bufferId, 0, buffer, 12, bufferId.Length);
 
             return Base64UrlEncoder.Encode(buffer);
