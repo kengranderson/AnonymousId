@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>ReturnTrue.AspNetCore.Identity.Anonymous</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageId>Wakanda.AnonymousId</PackageId>
     <Authors>Alessandro Riperi, Ken Granderson</Authors>
     <Description>Middleware for ASP.NET Core to enable the tracking of anonymous users</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Migration from request headers to request features</PackageReleaseNotes>
     <PackageTags>AspNetCore Identity Anonymous</PackageTags>
     <Copyright>This project is licensed under the terms of the MIT license.</Copyright>
     <PackageLicenseUrl>https://github.com/aleripe/AnonymousId/blob/master/License.md</PackageLicenseUrl>
