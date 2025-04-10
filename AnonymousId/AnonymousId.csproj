@@ -1,24 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <PackageId>Wakanda.AnonymousId</PackageId>
-    <Authors>Alessandro Riperi, Ken Granderson</Authors>
-    <Description>Middleware for ASP.NET Core to enable the tracking of anonymous users</Description>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>AspNetCore Identity Anonymous</PackageTags>
-    <Copyright>This project is licensed under the terms of the MIT license.</Copyright>
-    <PackageLicenseUrl>https://github.com/aleripe/AnonymousId/blob/master/License.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/aleripe/AnonymousId</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/aleripe/AnonymousId</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<PackageId>Wakanda.AnonymousId</PackageId>
+		<Authors>Alessandro Riperi, Ken Granderson</Authors>
+		<Description>Middleware for ASP.NET Core to enable the tracking of anonymous users</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageTags>AspNetCore Identity Anonymous</PackageTags>
+		<Copyright>This project is licensed under the terms of the MIT license.</Copyright>
+		<PackageLicenseUrl>https://github.com/aleripe/AnonymousId/blob/master/License.md</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/aleripe/AnonymousId</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/aleripe/AnonymousId</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.3" />
-  </ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.8.0" />
+	</ItemGroup>
 
 </Project>
