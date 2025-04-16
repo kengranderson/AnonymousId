@@ -12,7 +12,6 @@
 		<PackageProjectUrl>https://github.com/aleripe/AnonymousId</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/aleripe/AnonymousId</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Nullable>disable</Nullable>
 	</PropertyGroup>
 	
